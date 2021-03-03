@@ -1,23 +1,25 @@
 package com.company;
 
+import java.util.FormattableFlags;
 import java.util.Scanner;
 
 public class Main {
 
     // write your code here
     public static void main(String[] args) {
-        // Initialisation demande si autres plats
 
         Scanner sc = new Scanner(System.in);
 
+        // Initialisation de la variable permettant de savoir si autres plats
         char reponse = 'O';
 
         //declare la variable total pour sommer les totaux de chacun des plats
         float total = 0;
 
         //declare la variable plat pour affichage dans le ticket
+        String listePlat = "";
 
-
+        // Début de la boucle tant que
         while (reponse == 'O') {
 
             // On affiche un message pour demander la saisie du plat
@@ -46,8 +48,11 @@ public class Main {
             float prix = sc.nextFloat();
             sc.nextLine();
 
-            // on calcul le prix total pour un plat
+            // on calcul le prix total pour les plats
             total = (quantite * prix) + total;
+
+            // on stocke la liste des plats dans une variable
+            listePlat = listePlat +"\n" + plat + " : " + (quantite * prix) +" "+ "Eur " + "(" + description + ")" ;
 
 
             //On demande si la personne veut saisir un autre plat
@@ -56,12 +61,23 @@ public class Main {
             //On récupère la réponse de l'utilisateur
             reponse = sc.nextLine().charAt(0);
 
-            // on affiche  le prix total
+            // on affiche  le sous toal et le prix total
             if (reponse == 'O')
-            {System.out.println("******* Sous total de l'addition est = " + total +" *******");
-            } else
-            {System.out.println("******* Le montant total de l'addition est = " + total +" *******" + "A bientôt");
+            {System.out.println("******* Sous total de l'addition est = " + total);
             }
-        }
+            else
+                {
+                    System.out.println( "+-----------------------------------------+---------------+" );
+                    System.out.println( "| Plats                                   | Total         |" );
+                    System.out.println( "+-----------------------------------------+---------------+" );
+                    System.out.printf(  "%10s\n", listePlat);
+                    System.out.printf(  "%50.2f\n", total);
+
+                    //System.out.println("** Le montant total de l'addition est = " + total + "Eur" + " ***" + listePlat );
+                    System.out.println( "+----------------------------------------------------------" );
+                }
+
+
     }
+}
 }
